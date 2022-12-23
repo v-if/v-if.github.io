@@ -1,6 +1,7 @@
 // Call the dataTables jQuery plugin
 $(document).ready(function() {
   $('#dataTable').DataTable({
+    searching: false, paging: false, info: false, ordering: false,
     columns: [
       { data: 'a',
         render: function(data, type, row, meta) {
