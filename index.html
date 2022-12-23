@@ -1,317 +1,276 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <!-- Basic -->
+<head>
+
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">   
-   
-    <!-- Mobile Metas -->
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
- 
-     <!-- Site Metas -->
-    <title>순풍순풍 - 라이딩 바람 지도</title>
-    <meta name="keywords" content="순풍순풍, 라이딩, 바람지도">
-    <meta name="description" content="순풍순풍, 라이딩, 바람지도">
-    <meta name="author" content="Fire Studio">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <!-- Site CSS -->
-    <link rel="stylesheet" href="style.css">    
-    <!-- ALL VERSION CSS -->
-    <link rel="stylesheet" href="css/versions.css">
-    <!-- Responsive CSS -->
-    <link rel="stylesheet" href="css/responsive.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/custom.css">
+    <title>SB Admin 2 - Dashboard</title>
 
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
-<body class="app_version" data-spy="scroll" data-target="#navbarApp" data-offset="98">
 
-    <!-- LOADER -->
-    <!-- <div id="preloader">
-        <img class="preloader" src="images/loaders/loader-app.gif" alt="">
-    </div> end loader -->
-    <!-- END LOADER -->
-	<div class="top-bar">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-					<div class="left-soi">
-						<ul>
-							<li class="social-links"><a href="https://apps.apple.com/us/app/순풍순풍-라이딩-바람-지도/id1577293912"><i class="fa fa-apple"></i></a></li>
-							<li class="social-links"><a href="https://play.google.com/store/apps/details?id=com.tkpark.wind"><i class="fa fa-android"></i></a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-    <header class="header header_style_01">
-        <nav class="navbar header-nav navbar-expand-lg">
-            <div class="container">
-				<a class="navbar-brand" href="index.html"><img src="images/logos/logo-app.png" alt="image"></a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarApp" aria-controls="navbarApp" aria-expanded="false" aria-label="Toggle navigation">
-					<span></span>
-					<span></span>
-					<span></span>
-				</button>
-                <div class="collapse navbar-collapse justify-content-end" id="navbarApp">
-                    <ul class="navbar-nav">
-                        <li><a class="nav-link active" href="#home">Home</a></li>
-                        <li><a class="nav-link" href="#screenshots">Screens</a></li>
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">v-if <sup>.github.io</sup></div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+                <a class="nav-link" href="index.html">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
                     </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                    </div>
+
+                    <!-- Content Row -->
+                    <div class="row">
+
+                        <!-- Area Chart -->
+                        <div class="col-xl-8 col-lg-7">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
+                                    <div class="dropdown no-arrow">
+                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                            aria-labelledby="dropdownMenuLink">
+                                            <div class="dropdown-header">Dropdown Header:</div>
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">Something else here</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div class="chart-area">
+                                        <canvas id="myAreaChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pie Chart -->
+                        <div class="col-xl-4 col-lg-5">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
+                                    <div class="dropdown no-arrow">
+                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                            aria-labelledby="dropdownMenuLink">
+                                            <div class="dropdown-header">Dropdown Header:</div>
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">Something else here</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div class="chart-pie pt-4 pb-2">
+                                        <canvas id="myPieChart"></canvas>
+                                    </div>
+                                    <div class="mt-4 text-center small">
+                                        <span class="mr-2">
+                                            <i class="fas fa-circle text-primary"></i> Direct
+                                        </span>
+                                        <span class="mr-2">
+                                            <i class="fas fa-circle text-success"></i> Social
+                                        </span>
+                                        <span class="mr-2">
+                                            <i class="fas fa-circle text-info"></i> Referral
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content Row -->
+                    <div class="row">
+
+                        <!-- Content Column -->
+                        <div class="col-xl-6 col-lg-7">
+
+                            <!-- Project Card Example -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
+                                </div>
+                                <div class="card-body">
+                                    <h4 class="small font-weight-bold">Server Migration <span
+                                            class="float-right">20%</span></h4>
+                                    <div class="progress mb-4">
+                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 20%"
+                                            aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <h4 class="small font-weight-bold">Sales Tracking <span
+                                            class="float-right">40%</span></h4>
+                                    <div class="progress mb-4">
+                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 40%"
+                                            aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <h4 class="small font-weight-bold">Customer Database <span
+                                            class="float-right">60%</span></h4>
+                                    <div class="progress mb-4">
+                                        <div class="progress-bar" role="progressbar" style="width: 60%"
+                                            aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <h4 class="small font-weight-bold">Payout Details <span
+                                            class="float-right">80%</span></h4>
+                                    <div class="progress mb-4">
+                                        <div class="progress-bar bg-info" role="progressbar" style="width: 80%"
+                                            aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <h4 class="small font-weight-bold">Account Setup <span
+                                            class="float-right">Complete!</span></h4>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 100%"
+                                            aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-xl-6 col-lg-5">
+
+                            <!-- Project Card Example -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Bar Chart</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-bar">
+                                        <canvas id="myBarChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
                 </div>
+                <!-- /.container-fluid -->
+
             </div>
-        </nav>
-    </header>
+            <!-- End of Main Content -->
 
-    <div id="home" class="parallax first-section" style="background-image:url('uploads/bg-img.jpg');">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <div class="big-tagline">
-                        <h2>순풍순풍 - 라이딩 바람 지도</h2>
-                        <p class="lead">라이딩시 순풍순풍 앱과 함께 순풍순풍 바람을 타고 가보세요.</p>
-                        <a data-scroll href="https://play.google.com/store/apps/details?id=com.tkpark.wind" class="btn btn-light btn-radius btn-brd"><i class="fa fa-play" aria-hidden="true"></i> Google Play</a>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a data-scroll href="https://apps.apple.com/us/app/순풍순풍-라이딩-바람-지도/id1577293912" class="btn btn-light btn-radius btn-brd"><i class="fa fa-apple" aria-hidden="true"></i> App Store</a>
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; v-if.github.io 2023</span>
                     </div>
                 </div>
-                <div class="app_iphone_01 wow slideInUp hidden-xs hidden-sm" data-wow-duration="1s" data-wow-delay="0.2s">
-                    <img src="uploads/app_iphone_01.png" alt="" class="img-fluid">
-                </div>
-                <div class="app_iphone_02 wow slideInUp hidden-xs hidden-sm" data-wow-duration="1s" data-wow-delay="0.5s">
-                    <img src="uploads/app_iphone_02.png" alt="" class="img-fluid">
-                </div>
-            </div><!-- end row -->
-        </div><!-- end container -->
-    </div><!-- end section -->
+            </footer>
+            <!-- End of Footer -->
 
-    <div id="screenshots" class="section wb">
-        <div class="container">
-            <div class="section-title text-center">
-                <h3>Screenshots of the App</h3>
-                <p class="lead">순풍순풍 앱 실행화면</p>
-            </div><!-- end title -->
+        </div>
+        <!-- End of Content Wrapper -->
 
-            <div class="owl-screenshots owl-carousel owl-theme">
-                <div class="owl-screen">
-                    <div class="service-widget">
-                        <div class="post-media entry wow fadeIn">
-                            <a href="uploads/screenshot_01.png" data-rel="prettyPhoto[gal]" class="hoverbutton global-radius"><i class="flaticon-unlink"></i></a>
-                            <img src="uploads/screenshot_01.png" alt="" class="img-fluid img-rounded">
-                            <div class="magnifier"></div>
-                        </div>
-                    </div><!-- end service -->
-                </div><!-- end col -->
+    </div>
+    <!-- End of Page Wrapper -->
 
-                <div class="owl-screen">
-                    <div class="service-widget">
-                        <div class="post-media entry wow fadeIn">
-                            <a href="uploads/screenshot_02.png" data-rel="prettyPhoto[gal]" class="hoverbutton global-radius"><i class="flaticon-unlink"></i></a>
-                            <img src="uploads/screenshot_02.png" alt="" class="img-fluid img-rounded">
-                            <div class="magnifier"></div>
-                        </div>
-                    </div><!-- end service -->
-                </div><!-- end col -->
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
 
-                <div class="owl-screen">
-                    <div class="service-widget">
-                        <div class="post-media entry wow fadeIn">
-                            <a href="uploads/screenshot_03.png" data-rel="prettyPhoto[gal]" class="hoverbutton global-radius"><i class="flaticon-unlink"></i></a>
-                            <img src="uploads/screenshot_03.png" alt="" class="img-fluid img-rounded">
-                            <div class="magnifier"></div>
-                        </div>
-                    </div><!-- end service -->
-                </div><!-- end col -->
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-                <div class="owl-screen">
-                    <div class="service-widget">
-                        <div class="post-media entry wow fadeIn">
-                            <a href="uploads/screenshot_04.png" data-rel="prettyPhoto[gal]" class="hoverbutton global-radius"><i class="flaticon-unlink"></i></a>
-                            <img src="uploads/screenshot_04.png" alt="" class="img-fluid img-rounded">
-                            <div class="magnifier"></div>
-                        </div>
-                    </div><!-- end service -->
-                </div><!-- end col -->
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-                <div class="owl-screen">
-                    <div class="service-widget">
-                        <div class="post-media entry wow fadeIn">
-                            <a href="uploads/screenshot_05.png" data-rel="prettyPhoto[gal]" class="hoverbutton global-radius"><i class="flaticon-unlink"></i></a>
-                            <img src="uploads/screenshot_05.png" alt="" class="img-fluid img-rounded">
-                            <div class="magnifier"></div>
-                        </div>
-                    </div><!-- end service -->
-                </div><!-- end col -->
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
 
-                <div class="owl-screen">
-                    <div class="service-widget">
-                        <div class="post-media entry wow fadeIn">
-                            <a href="uploads/screenshot_06.png" data-rel="prettyPhoto[gal]" class="hoverbutton global-radius"><i class="flaticon-unlink"></i></a>
-                            <img src="uploads/screenshot_06.png" alt="" class="img-fluid img-rounded">
-                            <div class="magnifier"></div>
-                        </div>
-                    </div><!-- end service -->
-                </div><!-- end col -->
+    <!-- Page level plugins -->
+    <script src="vendor/chart.js/Chart.min.js"></script>
 
-                <div class="owl-screen">
-                    <div class="service-widget">
-                        <div class="post-media entry wow fadeIn">
-                            <a href="uploads/screenshot_01.png" data-rel="prettyPhoto[gal]" class="hoverbutton global-radius"><i class="flaticon-unlink"></i></a>
-                            <img src="uploads/screenshot_01.png" alt="" class="img-fluid img-rounded">
-                            <div class="magnifier"></div>
-                        </div>
-                    </div><!-- end service -->
-                </div><!-- end col -->
-
-                <div class="owl-screen">
-                    <div class="service-widget">
-                        <div class="post-media entry wow fadeIn">
-                            <a href="uploads/screenshot_02.png" data-rel="prettyPhoto[gal]" class="hoverbutton global-radius"><i class="flaticon-unlink"></i></a>
-                            <img src="uploads/screenshot_02.png" alt="" class="img-fluid img-rounded">
-                            <div class="magnifier"></div>
-                        </div>
-                    </div><!-- end service -->
-                </div><!-- end col -->
-
-                <div class="owl-screen">
-                    <div class="service-widget">
-                        <div class="post-media entry wow fadeIn">
-                            <a href="uploads/screenshot_03.png" data-rel="prettyPhoto[gal]" class="hoverbutton global-radius"><i class="flaticon-unlink"></i></a>
-                            <img src="uploads/screenshot_03.png" alt="" class="img-fluid img-rounded">
-                            <div class="magnifier"></div>
-                        </div>
-                    </div><!-- end service -->
-                </div><!-- end col -->
-
-                <div class="owl-screen">
-                    <div class="service-widget">
-                        <div class="post-media entry wow fadeIn">
-                            <a href="uploads/screenshot_04.png" data-rel="prettyPhoto[gal]" class="hoverbutton global-radius"><i class="flaticon-unlink"></i></a>
-                            <img src="uploads/screenshot_04.png" alt="" class="img-fluid img-rounded">
-                            <div class="magnifier"></div>
-                        </div>
-                    </div><!-- end service -->
-                </div><!-- end col -->
-
-                <div class="owl-screen">
-                    <div class="service-widget">
-                        <div class="post-media entry wow fadeIn">
-                            <a href="uploads/screenshot_05.png" data-rel="prettyPhoto[gal]" class="hoverbutton global-radius"><i class="flaticon-unlink"></i></a>
-                            <img src="uploads/screenshot_05.png" alt="" class="img-fluid img-rounded">
-                            <div class="magnifier"></div>
-                        </div>
-                    </div><!-- end service -->
-                </div><!-- end col -->
-
-                <div class="owl-screen">
-                    <div class="service-widget">
-                        <div class="post-media entry wow fadeIn">
-                            <a href="uploads/screenshot_06.png" data-rel="prettyPhoto[gal]" class="hoverbutton global-radius"><i class="flaticon-unlink"></i></a>
-                            <img src="uploads/screenshot_06.png" alt="" class="img-fluid img-rounded">
-                            <div class="magnifier"></div>
-                        </div>
-                    </div><!-- end service -->
-                </div><!-- end col -->
-
-            </div><!-- end row -->
-        </div><!-- end container -->
-    </div><!-- end section -->
-
-    <div class="parallax section noover" style="background-image:url('uploads/ben_img.jpg');">
-        <div class="container">
-            <div class="row text-center">
-                <div class="col-md-7 col-sm-12">
-                    <div class="customwidget text-left">
-                        <h1>Download our app</h1>
-                        <p>이 앱은 라이더들을 위해 만들어졌습니다. 라이딩을 할때 순풍순풍 바람을 타고 가보세요. 기상청 Open API를 활용하여 자전거 도로 근처의 동네예보를 표시하여 간접적으로 자전거도로의 바람, 강수, 기온을 확인할 수 있습니다. 이 앱이 마음에 드시면 마켓에서 평가, 친구들에게 추천, 공유 해 주세요.</p>
-                        <ul class="list-inline">
-                            <li class="list-inline-item"><i class="flaticon-apple"></i> Available on Apple</li>
-                            <li class="list-inline-item"><i class="flaticon-android"></i> Available on Android</li>
-                        </ul><!-- end list -->
-                        <a href="#features" data-scroll class="btn btn-light btn-radius btn-brd">Learn More</a>
-                    </div>
-                </div><!-- end col -->
-                <div class="col-md-6 iphones hidden-sm">
-                    <div class="text-center move image-center hidden-sm hidden-xs">
-                        <img src="uploads/iphones.png" alt="" class="img-fluid wow fadeInUp">
-                    </div>
-                </div>
-            </div><!-- end row -->
-        </div><!-- end container -->
-    </div><!-- end section -->
-
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                    <div class="widget clearfix">
-                        <div class="widget-title">
-                            <img src="images/logos/logo-app.png" alt="">
-                            <small>App Landing Template</small>                        </div>
-
-                    </div><!-- end clearfix -->
-                </div><!-- end col -->
-
-                <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-                    <div class="widget clearfix">
-                        <div class="widget-title">
-                            <h3>Contact Details</h3>
-                        </div>
-
-                        <ul class="footer-links">
-                            <li><a href="mailto:#">dev.tkpark@gmail.com</a></li>
-                            <li><a href="#">v-if.github.io</a></li>
-                            <li>Seoul, Republic of Korea</li>
-                        </ul><!-- end links -->
-                    </div><!-- end clearfix -->
-                </div><!-- end col -->
-
-                <div class="col-lg-2 col-md-6 col-sm-12 col-xs-12">
-                    <div class="widget clearfix">
-                        <div class="widget-title">
-                            <h3>Social</h3>
-                        </div>
-                        <ul class="footer-links">
-                            <li><a href="https://github.com/v-if"><i class="fa fa-github"></i> Github</a></li>
-                        </ul><!-- end links -->
-                    </div><!-- end clearfix -->
-                </div><!-- end col -->
-            </div><!-- end row -->
-        </div><!-- end container -->
-    </footer><!-- end footer -->
-
-    <div class="copyrights">
-        <div class="container">
-            <div class="footer-distributed">
-                <div class="footer-left">                    
-                    <p class="footer-company-name">All Rights Reserved. &copy; 2021 <a href="#">Fire Studio Inc</a></p>
-                </div>
-            </div>
-        </div><!-- end container -->
-    </div><!-- end copyrights -->
-
-    <a href="#home" data-scroll class="dmtop global-radius"><i class="fa fa-angle-up"></i></a>
-
-    <!-- ALL JS FILES -->
-    <script src="js/all.js"></script>
-    <!-- ALL PLUGINS -->
-    <script src="js/custom.js"></script>
-	<script src="js/zenith.js"></script>
-	<script>
-		$('#default').zenith({
-			layout: 'default' , 
-			slideSpeed: 450, 
-			autoplaySpeed: 2000
-		});
-	</script>
+    <!-- Page level custom scripts -->
+    <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script>
+    <script src="js/demo/chart-bar-demo.js"></script>
 
 </body>
+
 </html>
