@@ -10177,7 +10177,7 @@ a:focus {
 }
 
 .topbar #sidebarToggleTop:hover {
-  background-color: #eaecf4;
+  /*background-color: #eaecf4;*/
 }
 
 .topbar #sidebarToggleTop:active {

@@ -6,11 +6,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>SB Admin 2 - Dashboard</title>
-
+    <meta name="author" content="v-if">
+    <meta name="keyword" content="대출 계산기, 대출 이자 계산기, 원리금 상환 계산기, 원리금균등상환 계산기, 원금균등상환 계산기, 원금만기일시상환 계산기, 대출 이자 계산기, 대출 이자 계산 엑셀, 대출 이자, 이자 계산기, 대출 금리, 원리금균등상환, 원금균등상환, 원금만기일시상환, 대출계산기, 대출이자계산기, 이자계산기, 대출금리계산기, 적금계산기, 예금계산기, 대출이자 계산기, 적금금리 계산기, 이자계산, 대출 이자 계산법, 이자계산법">
+    <meta name="description" content="쉽고 간단한 대출 이자 계산기는 온라인으로 바로 계산해 볼 수 있습니다. 엑셀(xls)보다 편리합니다. 원리금균등상환/원금균등상환/원금만기일시상환 방법을 지원합니다. 모바일 사용자 편의성 지원을 지원하여 모바일, 스마트폰, 태블릿 PC에서도 이용 가능 합니다. (대출계산기, 대출상환계산기, 대출이자계산기)">
+    <title>쉽고 간단한 대출 이자 계산기</title>
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -18,24 +17,27 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
 
-<body id="page-top">
+<body id="page-top" class="sidebar-toggled">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion toggled" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                    <i class="fas fa-calculator"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">v-if <sup>.github.io</sup></div>
+                <div class="sidebar-brand-text mx-3">대출 이자 계산기</div>
             </a>
 
             <!-- Divider -->
@@ -44,8 +46,8 @@
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
                 <a class="nav-link" href="index.html">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>이자 계산기</span></a>
             </li>
 
             <!-- Divider -->
@@ -68,8 +70,51 @@
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-dark d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <!-- Topbar Search -->
+                    <form
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-dark" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
+
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <li class="nav-item dropdown no-arrow d-sm-none">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-search fa-fw"></i>
+                            </a>
+                            <!-- Dropdown - Messages -->
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                aria-labelledby="searchDropdown">
+                                <form class="form-inline mr-auto w-100 navbar-search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control bg-light border-0 small"
+                                            placeholder="Search for..." aria-label="Search"
+                                            aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-dark" type="button">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
 
                     </ul>
 
@@ -80,9 +125,8 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                    </div>
+                    <h1 class="h3 mb-2 text-gray-800">대출이자 계산기</h1>
+                    <p class="mb-4">대출금의 상환금액과 이자를 계산합니다.</p>
 
                     <!-- Content Row -->
                     <div class="row">
@@ -93,21 +137,7 @@
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
-                                    <div class="dropdown no-arrow">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                            aria-labelledby="dropdownMenuLink">
-                                            <div class="dropdown-header">Dropdown Header:</div>
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Something else here</a>
-                                        </div>
-                                    </div>
+                                    <h6 class="m-0 font-weight-bold text-dark">Earnings Overview</h6>
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
@@ -124,21 +154,7 @@
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
-                                    <div class="dropdown no-arrow">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                            aria-labelledby="dropdownMenuLink">
-                                            <div class="dropdown-header">Dropdown Header:</div>
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Something else here</a>
-                                        </div>
-                                    </div>
+                                    <h6 class="m-0 font-weight-bold text-dark">Revenue Sources</h6>
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
@@ -170,7 +186,7 @@
                             <!-- Project Card Example -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
+                                    <h6 class="m-0 font-weight-bold text-dark">Projects</h6>
                                 </div>
                                 <div class="card-body">
                                     <h4 class="small font-weight-bold">Server Migration <span
@@ -213,7 +229,7 @@
                             <!-- Project Card Example -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Bar Chart</h6>
+                                    <h6 class="m-0 font-weight-bold text-dark">Bar Chart</h6>
                                 </div>
                                 <div class="card-body">
                                     <div class="chart-bar">
@@ -226,7 +242,235 @@
 
                     </div>
 
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-dark">월별 상환금</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>회차</th>
+                                            <th>상환금</th>
+                                            <th>납입원금</th>
+                                            <th>이자</th>
+                                            <th>납입원금계</th>
+                                            <th>잔금</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>회차</th>
+                                            <th>상환금</th>
+                                            <th>납입원금</th>
+                                            <th>이자</th>
+                                            <th>납입원금계</th>
+                                            <th>잔금</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>843,208</td>
+                                            <td>343,208</td>
+                                            <td>500,000</td>
+                                            <td>343,208</td>
+                                            <td>199,656,792</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>843,208</td>
+                                            <td>343,208</td>
+                                            <td>500,000</td>
+                                            <td>343,208</td>
+                                            <td>199,656,792</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>843,208</td>
+                                            <td>343,208</td>
+                                            <td>500,000</td>
+                                            <td>343,208</td>
+                                            <td>199,656,792</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>843,208</td>
+                                            <td>343,208</td>
+                                            <td>500,000</td>
+                                            <td>343,208</td>
+                                            <td>199,656,792</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>843,208</td>
+                                            <td>343,208</td>
+                                            <td>500,000</td>
+                                            <td>343,208</td>
+                                            <td>199,656,792</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>843,208</td>
+                                            <td>343,208</td>
+                                            <td>500,000</td>
+                                            <td>343,208</td>
+                                            <td>199,656,792</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>843,208</td>
+                                            <td>343,208</td>
+                                            <td>500,000</td>
+                                            <td>343,208</td>
+                                            <td>199,656,792</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>843,208</td>
+                                            <td>343,208</td>
+                                            <td>500,000</td>
+                                            <td>343,208</td>
+                                            <td>199,656,792</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>843,208</td>
+                                            <td>343,208</td>
+                                            <td>500,000</td>
+                                            <td>343,208</td>
+                                            <td>199,656,792</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>843,208</td>
+                                            <td>343,208</td>
+                                            <td>500,000</td>
+                                            <td>343,208</td>
+                                            <td>199,656,792</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>843,208</td>
+                                            <td>343,208</td>
+                                            <td>500,000</td>
+                                            <td>343,208</td>
+                                            <td>199,656,792</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>843,208</td>
+                                            <td>343,208</td>
+                                            <td>500,000</td>
+                                            <td>343,208</td>
+                                            <td>199,656,792</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>843,208</td>
+                                            <td>343,208</td>
+                                            <td>500,000</td>
+                                            <td>343,208</td>
+                                            <td>199,656,792</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>843,208</td>
+                                            <td>343,208</td>
+                                            <td>500,000</td>
+                                            <td>343,208</td>
+                                            <td>199,656,792</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>843,208</td>
+                                            <td>343,208</td>
+                                            <td>500,000</td>
+                                            <td>343,208</td>
+                                            <td>199,656,792</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>843,208</td>
+                                            <td>343,208</td>
+                                            <td>500,000</td>
+                                            <td>343,208</td>
+                                            <td>199,656,792</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>843,208</td>
+                                            <td>343,208</td>
+                                            <td>500,000</td>
+                                            <td>343,208</td>
+                                            <td>199,656,792</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>843,208</td>
+                                            <td>343,208</td>
+                                            <td>500,000</td>
+                                            <td>343,208</td>
+                                            <td>199,656,792</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>843,208</td>
+                                            <td>343,208</td>
+                                            <td>500,000</td>
+                                            <td>343,208</td>
+                                            <td>199,656,792</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>843,208</td>
+                                            <td>343,208</td>
+                                            <td>500,000</td>
+                                            <td>343,208</td>
+                                            <td>199,656,792</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>843,208</td>
+                                            <td>343,208</td>
+                                            <td>500,000</td>
+                                            <td>343,208</td>
+                                            <td>199,656,792</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>843,208</td>
+                                            <td>343,208</td>
+                                            <td>500,000</td>
+                                            <td>343,208</td>
+                                            <td>199,656,792</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>843,208</td>
+                                            <td>343,208</td>
+                                            <td>500,000</td>
+                                            <td>343,208</td>
+                                            <td>199,656,792</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>843,208</td>
+                                            <td>343,208</td>
+                                            <td>500,000</td>
+                                            <td>343,208</td>
+                                            <td>199,656,792</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
+                <!-- /.container-fluid -->
                 <!-- /.container-fluid -->
 
             </div>
@@ -264,12 +508,17 @@
     <script src="js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
+    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level plugins -->
     <script src="vendor/chart.js/Chart.min.js"></script>
 
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
     <script src="js/demo/chart-bar-demo.js"></script>
+    <script src="js/demo/datatables-demo.js"></script>
 
 </body>
 
