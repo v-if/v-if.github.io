@@ -137,6 +137,15 @@ function calc() {
     var table = $('#dataTable').DataTable();
     table.clear();
     table.rows.add( result.monthly ).draw();
+
+	console.log(result);
+	if(result.monthly.length > 0) {
+		$('#resultTable').show();
+		$('#resultAmt1').text(Math.round(result.loanMoney).toLocaleString('ko-KR') + "원");
+		$('#resultAmt2').text(Math.round(result.totalInterest).toLocaleString('ko-KR') + "원");
+		$('#resultAmt3').text(Math.round(result.totalRepay).toLocaleString('ko-KR') + "원");
+		$('#resultAmt4').text(Math.round(result.monthly[0].repayment).toLocaleString('ko-KR') + "원");
+	}
 }
 
 function init() {
@@ -149,6 +158,12 @@ function init() {
     var table = $('#dataTable').DataTable();
     table.clear();
     table.rows.add( [] ).draw();
+
+	$('#resultTable').hide();
+	$('#resultAmt1').text("0원");
+	$('#resultAmt2').text("0원");
+	$('#resultAmt3').text("0원");
+	$('#resultAmt4').text("0원");
 }
 
 
