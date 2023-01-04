@@ -22,6 +22,16 @@
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-QB9BM16J9W"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'G-QB9BM16J9W');
+	</script>
+
 </head>
 
 <body id="page-top" class="sidebar-toggled">
@@ -324,6 +334,73 @@
                                           </div>
                                         </div>
                                     </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+					<div class="row" style="display: none;" id="resultTable">
+
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">대출원금</div>
+                                            <div id="resultAmt1" class="h5 mb-0 font-weight-bold text-gray-800">0원</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-won-sign fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-danger shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">총대출이자</div>
+                                            <div id="resultAmt2" class="h5 mb-0 font-weight-bold text-gray-800">0원</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fa fa-plus-circle fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">총상환금액</div>
+                                            <div id="resultAmt3" class="h5 mb-0 font-weight-bold text-gray-800">0원</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fa fa-university fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-info shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">1회차 상환금액</div>
+                                            <div id="resultAmt4" class="h5 mb-0 font-weight-bold text-gray-800">0원</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="far fa-hand-point-up fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
