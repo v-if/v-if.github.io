@@ -125,7 +125,7 @@ function addLoanPeriod(num) {
 function calc() {
     clear();
 
-    var method = $("input[name='input4']:checked").val();; // 이자계산방식 (0: 단리, 1: 월복리);
+    var method = $("input[name='input4']:checked").val(); // 이자계산방식 (0: 단리, 1: 월복리);
     var monthAmt = $('#input1').val(); // 월정립액
     var yearRate = Number($('#input2').val()) / 100; // 연이자율
     var savingsMonth =Number($('#input3').val()); // 적립기간(개월)
@@ -163,6 +163,7 @@ function init() {
     $('#input1').val(0);
     $('#input2').val(0);
     $('#input3').val(0);
+    $("input[name='input4']").filter('[value=0]').prop('checked', true);
 
     clear();
 }
@@ -260,6 +261,30 @@ function rpad(val, padLength, padString){
     return val;
 }
 
+function numberToKorean(number){
+    var inputNumber  = number < 0 ? false : number;
+    var unitWords    = ['', '만', '억', '조', '경'];
+    var splitUnit    = 10000;
+    var splitCount   = unitWords.length;
+    var resultArray  = [];
+    var resultString = '';
+
+    for (var i = 0; i < splitCount; i++){
+         var unitResult = (inputNumber % Math.pow(splitUnit, i + 1)) / Math.pow(splitUnit, i);
+        unitResult = Math.floor(unitResult);
+        if (unitResult > 0){
+            resultArray[i] = unitResult;
+        }
+    }
+
+    for (var i = 0; i < resultArray.length; i++){
+        if(!resultArray[i]) continue;
+        resultString = String(resultArray[i]) + unitWords[i] + resultString;
+    }
+
+    return resultString;
+}
+
 
 function setChart(result) {
     var filteredData = result.monthly.filter((obj, index) => (index+1) % 12 == 0);
@@ -325,7 +350,8 @@ function setChart(result) {
                         padding: 10,
                         // Include a dollar sign in the ticks
                         callback: function(value, index, values) {
-                            return number_format(value);
+                            //return number_format(value);
+                            return numberToKorean(value);
                         }
                     },
                     gridLines: {
