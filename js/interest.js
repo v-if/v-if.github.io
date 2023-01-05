@@ -1,3 +1,5 @@
+var myBarChart;
+
 $(window).ready(function (){
     $('#dataTable').DataTable({
         searching: false, paging: false, info: false, ordering: false,
@@ -250,17 +252,27 @@ function calcInterest(method, monthAmt, yearRate, savingsMonth) {
     
     return obj;
 }
-var myBarChart;
-function setChart(result) {
 
+function rpad(val, padLength, padString){
+    while(val.length < padLength){
+        val += padString;
+    }
+    return val;
+}
+
+
+function setChart(result) {
     var filteredData = result.monthly.filter((obj, index) => (index+1) % 12 == 0);
+    var totalBalanceTxt = Math.trunc(result.totalBalance).toString();
+    var maxTotalBalance = Number(totalBalanceTxt.substring(0,1)) + 1;
+    var maxYTicksLimit = maxTotalBalance.toString().padEnd(maxTotalBalance == 10 ? totalBalanceTxt.length+1 : totalBalanceTxt.length, '0');
 
     // Bar Chart
     var ctx = document.getElementById("myBarChart");
     myBarChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: filteredData.map(obj => { return obj.round }),
+            labels: filteredData.map(obj => { return 'Year ' + obj.round }),
             datasets: [
                 {
                     label: "Amount",
@@ -306,8 +318,9 @@ function setChart(result) {
                 yAxes: [{
                     stacked: true,
                     ticks: {
+                        beginAtZero: true,
                         min: 0,
-                        max: result.totalBalance,
+                        max: maxYTicksLimit, //result.totalBalance,
                         maxTicksLimit: 10,
                         padding: 10,
                         // Include a dollar sign in the ticks
@@ -342,7 +355,7 @@ function setChart(result) {
                 callbacks: {
                     label: function(tooltipItem, chart) {
                         var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-                        return datasetLabel + number_format(tooltipItem.yLabel);
+                        return datasetLabel + ' ' + number_format(tooltipItem.yLabel);
                     }
                 }
             },
