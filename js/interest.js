@@ -308,9 +308,9 @@ function setChart(result) {
                 },
                 {
                     label: "Interest",
-                    backgroundColor: "#008d93",
-                    hoverBackgroundColor: "#008d93",
-                    borderColor: "#008d93",
+                    backgroundColor: "#36b9cc",
+                    hoverBackgroundColor: "#36b9cc",
+                    borderColor: "#36b9cc",
                     data: filteredData.map(obj => { return obj.interest }),
                 }
             ],
@@ -346,7 +346,7 @@ function setChart(result) {
                         beginAtZero: true,
                         min: 0,
                         max: maxYTicksLimit, //result.totalBalance,
-                        maxTicksLimit: 10,
+                        maxTicksLimit: 6,
                         padding: 10,
                         // Include a dollar sign in the ticks
                         callback: function(value, index, values) {
