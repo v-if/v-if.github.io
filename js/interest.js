@@ -290,17 +290,17 @@ function setChart(result) {
     myBarChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: filteredData.map((obj, index) => { return index == 0 ? 'Now' : 'Year ' + obj.round }),
+            labels: filteredData.map((obj, index) => { return index == 0 ? 'Now' : obj.round + '년' }),
             datasets: [
                 {
-                    label: "Principal",
+                    label: "납입금",
                     backgroundColor: "#4e73df",
                     hoverBackgroundColor: "#2e59d9",
                     borderColor: "#4e73df",
                     data: filteredData.map(obj => { return obj.payment }),
                 },
                 {
-                    label: "Interest",
+                    label: "총이자",
                     backgroundColor: "#36b9cc",
                     hoverBackgroundColor: "#36b9cc",
                     borderColor: "#36b9cc",
@@ -379,15 +379,15 @@ function setChart(result) {
                         //return datasetLabel + ' ' + number_format(tooltipItem.yLabel);
                         var label1 = chart.datasets[0].label || '';
                         var label2 = chart.datasets[1].label || '';
-                        var label3 = 'Sum';
+                        var label3 = '수령액';
 
                         var value1 = number_format(chart.datasets[0].data[tooltipItem.index]);
                         var value2 = number_format(chart.datasets[1].data[tooltipItem.index]);
                         var value3 = number_format(chart.datasets[0].data[tooltipItem.index] + chart.datasets[1].data[tooltipItem.index]);
 
                         return [label1 + ' ' + value1, 
-                                label2 + '   ' + value2,
-                                label3 + '        ' + value3
+                                label2 + ' ' + value2,
+                                label3 + ' ' + value3
                                ];
                     }
                 }
