@@ -254,13 +254,6 @@ function calcInterest(method, monthAmt, yearRate, savingsMonth) {
     return obj;
 }
 
-function rpad(val, padLength, padString){
-    while(val.length < padLength){
-        val += padString;
-    }
-    return val;
-}
-
 function numberToKorean(number){
     var inputNumber  = number < 0 ? false : number;
     var unitWords    = ['', '만', '억', '조', '경'];
@@ -297,10 +290,10 @@ function setChart(result) {
     myBarChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: filteredData.map(obj => { return 'Year ' + obj.round }),
+            labels: filteredData.map((obj, index) => { return index == 0 ? 'Now' : 'Year ' + obj.round }),
             datasets: [
                 {
-                    label: "Amount",
+                    label: "Principal",
                     backgroundColor: "#4e73df",
                     hoverBackgroundColor: "#2e59d9",
                     borderColor: "#4e73df",
@@ -328,6 +321,7 @@ function setChart(result) {
             scales: {
                 xAxes: [{
                     stacked: true,
+                    display: true,
                     time: {
                         unit: 'year'
                     },
@@ -371,6 +365,7 @@ function setChart(result) {
                 titleFontColor: '#6e707e',
                 titleFontSize: 14,
                 backgroundColor: "rgb(255,255,255)",
+                bodyAlign: 'left',
                 bodyFontColor: "#858796",
                 borderColor: '#dddfeb',
                 borderWidth: 1,
@@ -380,8 +375,20 @@ function setChart(result) {
                 caretPadding: 10,
                 callbacks: {
                     label: function(tooltipItem, chart) {
-                        var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-                        return datasetLabel + ' ' + number_format(tooltipItem.yLabel);
+                        //var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+                        //return datasetLabel + ' ' + number_format(tooltipItem.yLabel);
+                        var label1 = chart.datasets[0].label || '';
+                        var label2 = chart.datasets[1].label || '';
+                        var label3 = 'Sum';
+
+                        var value1 = number_format(chart.datasets[0].data[tooltipItem.index]);
+                        var value2 = number_format(chart.datasets[1].data[tooltipItem.index]);
+                        var value3 = number_format(chart.datasets[0].data[tooltipItem.index] + chart.datasets[1].data[tooltipItem.index]);
+
+                        return [label1 + ' ' + value1, 
+                                label2 + '   ' + value2,
+                                label3 + '        ' + value3
+                               ];
                     }
                 }
             },
