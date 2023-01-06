@@ -280,10 +280,31 @@ function numberToKorean(number){
 
 
 function setChart(result) {
-    var filteredData = result.monthly.filter((obj, index) => (index+1) % 12 == 0);
+    
+    // Y축 MAX값 계산
     var totalBalanceTxt = Math.trunc(result.totalBalance).toString();
     var maxTotalBalance = Number(totalBalanceTxt.substring(0,1)) + 1;
     var maxYTicksLimit = maxTotalBalance.toString().padEnd(maxTotalBalance == 10 ? totalBalanceTxt.length+1 : totalBalanceTxt.length, '0');
+
+    // Y축 MAX값 예외처리
+    var frontNum = Number(totalBalanceTxt.substring(0,2));
+    if(frontNum >= 10 && frontNum < 15) {
+        console.log('111 : ' + frontNum);
+        var maxFront = '15';
+        maxYTicksLimit = maxFront.padEnd(totalBalanceTxt.length, '0');
+    } else if(frontNum >= 60 && frontNum < 80) {
+        console.log('222 : ' + frontNum);
+        var maxFront = '80';
+        maxYTicksLimit = maxFront.padEnd(totalBalanceTxt.length, '0');
+    } else if(frontNum >= 80 && frontNum <= 99) {
+        console.log('333 : ' + frontNum);
+        var maxFront = '10';
+        maxYTicksLimit = maxFront.padEnd(totalBalanceTxt.length+1, '0');
+    }
+
+
+    // 월단위 데이터 -> 년단위로 
+    var filteredData = result.monthly.filter((obj, index) => (index+1) % 12 == 0);
 
     // Bar Chart
     var ctx = document.getElementById("myBarChart");
