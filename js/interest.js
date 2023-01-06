@@ -289,15 +289,12 @@ function setChart(result) {
     // Y축 MAX값 예외처리
     var frontNum = Number(totalBalanceTxt.substring(0,2));
     if(frontNum >= 10 && frontNum < 15) {
-        console.log('111 : ' + frontNum);
         var maxFront = '15';
         maxYTicksLimit = maxFront.padEnd(totalBalanceTxt.length, '0');
     } else if(frontNum >= 60 && frontNum < 80) {
-        console.log('222 : ' + frontNum);
         var maxFront = '80';
         maxYTicksLimit = maxFront.padEnd(totalBalanceTxt.length, '0');
     } else if(frontNum >= 80 && frontNum <= 99) {
-        console.log('333 : ' + frontNum);
         var maxFront = '10';
         maxYTicksLimit = maxFront.padEnd(totalBalanceTxt.length+1, '0');
     }
