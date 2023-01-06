@@ -98,8 +98,8 @@ function addRate(num) {
         $('#input2').val(0);
     } else {
         value += num;
-        if(value > 39) {
-            $('#input2').val(39);
+        if(value > 100) {
+            $('#input2').val(100);
         } else {
             value = Math.floor(value * 100) / 100;
             $('#input2').val(value);
@@ -114,8 +114,8 @@ function addLoanPeriod(num) {
         $('#input3').val(0);
     } else {
         value += num;
-        if (value > 360) {
-            $('#input3').val(360);
+        if (value > 1200) {
+            $('#input3').val(1200);
         } else {
             $('#input3').val(value);
         }
@@ -256,7 +256,7 @@ function calcInterest(method, monthAmt, yearRate, savingsMonth) {
 
 function numberToKorean(number){
     var inputNumber  = number < 0 ? false : number;
-    var unitWords    = ['', '만', '억', '조', '경'];
+    var unitWords    = ['', '만', '억', '조', '경', '해'];
     var splitUnit    = 10000;
     var splitCount   = unitWords.length;
     var resultArray  = [];
