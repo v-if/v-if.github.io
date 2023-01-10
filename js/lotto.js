@@ -1,12 +1,61 @@
 var myBarChart;
+var chartData = new Map();
 
-$(window).ready(function (){
-    // for test
-    $('#input1').val('146,141,140,140,139,133,138,136,113,140,143,154,149,150,144,138,151,155,138,147,141,121,125,139,134,140,151,126,133,124,141,120,145,161,134,142,146,137,150,145,131,138,147,141,147');
-    //$('#input1').val('1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1');
+$(document).ready(function (){
+    var jsonData = JSON.parse(JSON.stringify(data));
+    for(i=0; i<jsonData.length; i++) {
+        $('#input2').append('<option value="'+ jsonData[i].data +'">'+ jsonData[i].no +'</option>');
+    }
+
+    $('#input2').on('change', function() {
+        $('#input1').val(this.value);
+    });
+
+
+    // init
+    for(var i=0; i<45; i++) {
+        var key = i+1;
+        var value = { num: i+1, count:0 };
+        chartData.set(key, value);
+    }
+    console.log(chartData);
 });
 
 function calc() {
+    $('#resultDashboard').hide();
+    $('#resultAmt1').text('');
+
+    var gameCnt = 10;
+    var data = $('#input1').val(); // data
+    console.log(data);
+    var arrData = data.split(',');
+    console.log(arrData.length);
+
+    if(arrData.length == 45) {
+
+        for(var i=0; i<gameCnt; i++) {
+            var result = calcAnalytics(
+                arrData, // arrData: 번호 통계 데이터
+            );
+            //console.log(result);
+
+            for(var j=0; j<result.lotto.length; j++) {
+                //console.log(result.lotto[j]);
+                var key = result.lotto[j];
+                var value = chartData.get(key);
+                value.count += 1;
+                chartData.set(key, value);
+            }
+        }
+        //console.log(chartData);
+
+        const tempData = [...chartData].map(([name, value]) => ({ value }));
+        var drawingData = tempData.map((obj, index) => { return { num:obj.value.num, count:obj.value.count } });
+        setChart(drawingData);
+    }
+}
+
+function _calc() {
     var gameCnt = 1000;
     var data = $('#input1').val(); // data
     console.log(data);
@@ -85,8 +134,10 @@ function _shuffle(array) {
 }
 
 function clear() {
+    $('#resultChart').hide();
 	$('#resultDashboard').hide();
 	$('#resultAmt1').text("");
+    $('#input2').val("");
 }
 
 
@@ -160,4 +211,136 @@ function calcAnalytics(arrData) {
     };
     
     return obj;
+}
+
+
+// Chart Color
+
+const red = ['rgba(255, 99, 132, 0.2)', 'rgb(255, 99, 132)'];
+const orange = ['rgba(255, 159, 64, 0.2)', 'rgb(255, 159, 64)'];
+const yellow = ['rgba(255, 205, 86, 0.2)', 'rgb(255, 205, 86)'];
+const green = ['rgba(75, 192, 192, 0.2)', 'rgb(75, 192, 192)'];
+const blue = ['rgba(54, 162, 235, 0.2)', 'rgb(54, 162, 235)'];
+const purple = ['rgba(153, 102, 255, 0.2)', 'rgb(153, 102, 255)'];
+const gray = ['rgba(201, 203, 207, 0.2)', 'rgb(201, 203, 207)'];
+
+
+
+function setChart(arrData) {
+    $('#resultChart').show();
+
+    if(typeof myBarChart !== 'undefined')
+        myBarChart.destroy();
+
+    console.log(arrData);
+
+
+    var tempData = arrData.slice();
+    let sortedByValueDsc = tempData.sort((a, b) => a.count - b.count).reverse();
+    console.log(sortedByValueDsc);
+    var topSixValue = sortedByValueDsc[5].count;
+    console.log(topSixValue);
+    var filteredData = sortedByValueDsc.filter((obj, index) => obj.count >= topSixValue);
+    console.log(filteredData.length);
+
+    if(filteredData.length == 6) {
+        $('#resultDashboard').show();
+        filteredData.sort((a, b) => a.num - b.num);
+        $('#resultAmt1').text(filteredData.map((obj, index) => { return obj.num }));
+    }
+    
+    // Y축 MAX값 계산
+    var maxYTicksLimit;
+
+    // Bar Chart
+    var ctx = document.getElementById("myBarChart");
+    myBarChart = new Chart(ctx, {
+        type: 'bar',
+        showTooltips: false,
+        data: {
+            labels: arrData.map((obj, index) => { return index+1 }),
+            datasets: [
+                {
+                    label: "Count",
+                    data: arrData.map((obj, index) => { return obj.count }),
+                    backgroundColor: arrData.map((obj, index) => { return filteredData.length != 6 ? green[0] : Number(obj.count) >= Number(topSixValue) ? red[0] : green[0] }),
+                    borderColor: arrData.map((obj, index) => { return filteredData.length != 6 ? green[1] : Number(obj.count) >= Number(topSixValue) ? red[1] : green[1] }),
+                    borderWidth: 1,
+                }
+            ],
+        },
+        options: {
+            maintainAspectRatio: false,
+            layout: {
+                padding: {
+                    left: 10,
+                    right: 25,
+                    top: 25,
+                    bottom: 0
+                }
+            },
+            scales: {
+                xAxes: [{
+                    stacked: false,
+                    display: true,
+                    time: {
+                        unit: 'year'
+                    },
+                    gridLines: {
+                        display: false,
+                        drawBorder: false
+                    },
+                    ticks: {
+                        maxTicksLimit: 6
+                    },
+                    maxBarThickness: 25,
+                }],
+                yAxes: [{
+                    stacked: true,
+                    ticks: {
+                        beginAtZero: true,
+                        min: 0,
+                        max: maxYTicksLimit, //result.totalBalance,
+                        maxTicksLimit: 6,
+                        padding: 10,
+                        // Include a dollar sign in the ticks
+                        callback: function(value, index, values) {
+                            //return number_format(value);
+                            return value;
+                        }
+                    },
+                    gridLines: {
+                        color: "rgb(234, 236, 244)",
+                        zeroLineColor: "rgb(234, 236, 244)",
+                        drawBorder: false,
+                        borderDash: [2],
+                        zeroLineBorderDash: [2]
+                    }
+                }],
+            },
+            legend: {
+                position: 'top'
+            },
+            tooltips: {
+                titleMarginBottom: 10,
+                titleFontColor: '#6e707e',
+                titleFontSize: 14,
+                backgroundColor: "rgb(255,255,255)",
+                bodyAlign: 'left',
+                bodyFontColor: "#858796",
+                borderColor: '#dddfeb',
+                borderWidth: 1,
+                xPadding: 15,
+                yPadding: 15,
+                displayColors: false,
+                caretPadding: 10,
+                callbacks: {
+                    label: function(tooltipItem, chart) {
+                        var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+                        return datasetLabel + ' ' + tooltipItem.yLabel;
+                    }
+                }
+            },
+        }
+    });
 }
