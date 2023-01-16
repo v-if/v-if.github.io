@@ -173,7 +173,7 @@ function sendAjax() {
     var sql = 'select * ';
     var callback = 'my_callback';
 
-    var url = 'http://spreadsheets.google.com/a/google.com/tq?',
+    var url = 'https://spreadsheets.google.com/a/google.com/tq?',
         params = {
             sheet: sheet,
             key: '12NTj_4nSjyNbmv6kzRqQNLMBdvAlEosQD7fy4FbukN0',
@@ -199,7 +199,7 @@ function sendAjax() {
 // https://coderwall.com/p/pluhsg/google-spreadsheet-json-api-sql-filtering
 var query = function(sql, sheet, callback)
 {
-    var url = 'http://spreadsheets.google.com/a/google.com/tq?',
+    var url = 'https://spreadsheets.google.com/a/google.com/tq?',
         params = {
             sheet: sheet,
             key: '12NTj_4nSjyNbmv6kzRqQNLMBdvAlEosQD7fy4FbukN0',
