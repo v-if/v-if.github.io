@@ -113,6 +113,15 @@ function _calc() {
 function init() {
     $('#input1').val('');
 
+
+    // init
+    for(var i=0; i<45; i++) {
+        var key = i+1;
+        var value = { num: i+1, count:0 };
+        chartData.set(key, value);
+    }
+    console.log(chartData);
+
     clear();
 }
 
