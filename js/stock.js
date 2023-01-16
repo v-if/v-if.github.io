@@ -180,7 +180,7 @@ var query = function(sql, sheet, callback)
         qs.push(key + '=' + params[key]);
     }
     url += qs.join('&');
-    console.log('## 2');
+    console.log('## 2', url);
     return jsonp(url); // Call JSONP helper function
 }
 
