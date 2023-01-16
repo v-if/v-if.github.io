@@ -108,6 +108,7 @@ function calc() {
 
     tableClear();
     $('#resultTable').show();
+    console.log('## 1');
     query('select * ', ticker, 'my_callback');
 }
 
@@ -179,18 +180,26 @@ var query = function(sql, sheet, callback)
         qs.push(key + '=' + params[key]);
     }
     url += qs.join('&');
+    console.log('## 2');
     return jsonp(url); // Call JSONP helper function
 }
 
 var jsonp = function(url)
 {
+    console.log('## 3');
     var script = window.document.createElement('script');
+    console.log('## 3-1');
     script.async = true;
+    console.log('## 3-2');
     script.src = url;
+    console.log('## 3-3');
     script.onerror = function()
     {
+        console.log('## 3-4');
         alert('Can not access JSONP file.')
     };
+    console.log('## 3-5');
+
     var done = false;
     script.onload = script.onreadystatechange = function()
     {
