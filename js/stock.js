@@ -101,6 +101,7 @@ function calc() {
     if(valueCheck())
         return;
 
+    /*
     var ticker = $('#input1').val();
     var date = $('#input2').val();
     var amount = $('#input3').val();
@@ -110,6 +111,9 @@ function calc() {
     $('#resultTable').show();
     console.log('## 1');
     query('select * ', ticker, 'my_callback');
+    */
+
+    sendAjax();
 }
 
 function _calc() {
@@ -161,6 +165,34 @@ function tableClear() {
 
     if(typeof myBarChart !== 'undefined')
         myBarChart.destroy();
+}
+
+function sendAjax() {
+
+    var sheet = $('#input1').val();
+    var sql = 'select * ';
+    var callback = 'my_callback';
+
+    var url = 'http://spreadsheets.google.com/a/google.com/tq?',
+        params = {
+            sheet: sheet,
+            key: '12NTj_4nSjyNbmv6kzRqQNLMBdvAlEosQD7fy4FbukN0',
+            tq: encodeURIComponent(sql),
+            tqx: 'responseHandler:' + callback
+        },
+        qs = [];
+    for (var key in params)
+    {
+        qs.push(key + '=' + params[key]);
+    }
+    url += qs.join('&');
+    console.log('sendAjax() ', url);
+
+    $.ajax({
+        url: url,
+        type: "GET",
+        dataType: 'jsonp'
+    });
 }
 
 
