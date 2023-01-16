@@ -35,20 +35,30 @@ $(document).ready(function (){
 
     var jsonData = JSON.parse(JSON.stringify(data));
     for(i=0; i<jsonData.length; i++) {
-        $('#input1').append('<option value="'+ jsonData[i].ticker +'">'+ jsonData[i].ticker +'</option>');
+        $('#input1').append('<option value="'+ jsonData[i].ticker +'">'+ jsonData[i].ticker + " - " + jsonData[i].name +'</option>');
     }
+    $('#input1').change(function() {
+        for(i=0; i<jsonData.length; i++) {
+            if(jsonData[i].ticker == this.value) {
+                console.log(jsonData[i].startDate);
+                //$('#input2').val(jsonData[i].startDate);
+                $("#input2").datepicker("update", jsonData[i].startDate);
+                $('#input2').datepicker('updateDates');
+            }
+        }
+    });
 
 
     $('#input2').datepicker({
         format: 'yyyy-mm-dd',
         daysOfWeekDisabled: [0, 6],
         autoclose: true,
-        language: 'kr',
-        templates : {
-            leftArrow: '<i class="fa fa-long-arrow-left"></i>',
-            rightArrow: '<i class="fa fa-long-arrow-right"></i>'
-        },
+        language: 'kr'
     });
+    $('.prev i').removeClass();
+    $('.prev i').addClass("fa fa-chevron-left");
+    $('.next i').removeClass();
+    $('.next i').addClass("fa fa-chevron-right");
 
 
     const input3 = document.querySelector('#input3');
@@ -78,8 +88,15 @@ function addAmount(num) {
 }
 
 function valueCheck() {
+    var ticker = $('#input1').val();
     var date = $('#input2').val();
     var amount = $('#input3').val();
+
+    if(ticker == '') {
+        $('#popupModalMsg').text("주식을 선택해주세요.");
+        $('#popupModal').modal('show');
+        return true;
+    }
 
     if(date == '') {
         $('#popupModalMsg').text("일자를 입력해주세요.");
@@ -108,7 +125,6 @@ function calc() {
 
     tableClear();
     $('#resultTable').show();
-    console.log('## 1');
     query('select * ', ticker, 'my_callback');
 
     //sendAjax();
@@ -210,46 +226,32 @@ var query = function(sql, sheet, callback)
         qs.push(key + '=' + params[key]);
     }
     url += qs.join('&');
-    console.log('## 2', url);
     return jsonp(url); // Call JSONP helper function
 }
 
 var jsonp = function(url)
 {
-    console.log('## 3');
     var script = window.document.createElement('script');
-    console.log('## 3-1');
     script.async = true;
-    console.log('## 3-2');
     script.src = url;
-    console.log('## 3-3');
     script.onerror = function()
     {
-        console.log('## 3-3 111');
         alert('Can not access JSONP file.')
     };
-    console.log('## 3-5');
 
     var done = false;
-    console.log('## 3-6');
     script.onload = script.onreadystatechange = function()
     {
-        console.log('## 3-6 111');
         if (!done && (!this.readyState || this.readyState === 'loaded' || this.readyState === 'complete'))
         {
-            console.log('## 3-6 222');
             done = true;
-            console.log('## 3-6 333');
             script.onload = script.onreadystatechange = null;
-            console.log('## 3-6 444');
             if (script.parentNode)
             {
-                console.log('## 3-6 555');
                 return script.parentNode.removeChild(script);
             }
         }
     };
-    console.log('## 3-7');
     window.document.getElementsByTagName('head')[0].appendChild(script);
 };
 
@@ -425,7 +427,7 @@ function setChart(arrData) {
                         padding: 10,
                         // Include a dollar sign in the ticks
                         callback: function(value, index, values) {
-                            return number_format(value);
+                            return '$' + number_format(value);
                         }
                     },
                     gridLines: {
