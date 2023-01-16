@@ -101,7 +101,6 @@ function calc() {
     if(valueCheck())
         return;
 
-    /*
     var ticker = $('#input1').val();
     var date = $('#input2').val();
     var amount = $('#input3').val();
@@ -111,9 +110,8 @@ function calc() {
     $('#resultTable').show();
     console.log('## 1');
     query('select * ', ticker, 'my_callback');
-    */
 
-    sendAjax();
+    //sendAjax();
 }
 
 function _calc() {
