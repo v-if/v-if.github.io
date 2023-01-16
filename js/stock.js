@@ -195,24 +195,31 @@ var jsonp = function(url)
     console.log('## 3-3');
     script.onerror = function()
     {
-        console.log('## 3-4');
+        console.log('## 3-3 111');
         alert('Can not access JSONP file.')
     };
     console.log('## 3-5');
 
     var done = false;
+    console.log('## 3-6');
     script.onload = script.onreadystatechange = function()
     {
+        console.log('## 3-6 111');
         if (!done && (!this.readyState || this.readyState === 'loaded' || this.readyState === 'complete'))
         {
+            console.log('## 3-6 222');
             done = true;
+            console.log('## 3-6 333');
             script.onload = script.onreadystatechange = null;
+            console.log('## 3-6 444');
             if (script.parentNode)
             {
+                console.log('## 3-6 555');
                 return script.parentNode.removeChild(script);
             }
         }
     };
+    console.log('## 3-7');
     window.document.getElementsByTagName('head')[0].appendChild(script);
 };
 
