@@ -1,4 +1,5 @@
 var myBarChart;
+var myLineChart;
 
 $(document).ready(function (){
     
@@ -18,7 +19,11 @@ $(document).ready(function (){
                     return '$' + Math.round(data).toLocaleString('ko-KR');
                 }
             },
-            { data: 'rate' },
+            { data: 'rate',
+                render: function(data, type, row, meta) {
+                    return Math.round(data).toLocaleString('ko-KR') + '%';
+                }
+            },
         ],
         columnDefs: [
             { className: "text-center", "targets": [0,1] },
@@ -168,6 +173,7 @@ function init() {
 
     $('#resultTable').hide();
     $('#resultChart').hide();
+    $('#resultChart2').hide();
 
     tableClear();
 }
@@ -179,6 +185,9 @@ function tableClear() {
 
     if(typeof myBarChart !== 'undefined')
         myBarChart.destroy();
+
+    if(typeof myLineChart !== 'undefined')
+        myLineChart.destroy();
 }
 
 function sendAjax() {
@@ -329,7 +338,7 @@ var my_callback = function(data)
                     price: lastData.Close,
                     qty: showData[0].qty,
                     amount: Math.trunc(lastData.Close * showData[0].qty),
-                    rate: Math.floor((((Math.trunc(lastData.Close * showData[0].qty)) / showData[0].amount) - 1) * 100) + "%"
+                    rate: Math.floor((((Math.trunc(lastData.Close * showData[0].qty)) / showData[0].amount) - 1) * 100)
                 }
 
                 break;
@@ -345,6 +354,8 @@ var my_callback = function(data)
             table.rows.add(showData).draw();
             
             setChart(showData);
+
+            setAreaChart(data, showData);
         } else {
             $('#popupModalMsg').text("입력한 투자일자가 휴일이거나 가격정보가 없습니다. 입력한 종목의 가격정보는 " + getDateFormat(firstData.Date) + " 이후부터 있습니다.");
             $('#popupModal').modal('show');
@@ -464,6 +475,145 @@ function setChart(arrData) {
             },
         }
     });
+}
+
+function setAreaChart(data, showData) {
+    $('#resultChart2').show();
+
+    if(typeof myLineChart !== 'undefined')
+        myLineChart.destroy();
+
+    //console.log(data, data.length, showData, showData.length);
+
+    var warp = Math.trunc(data.length / 50);
+    var drawIdx = data.length - (warp * 50);
+    //console.log(warp, drawIdx);
+
+    var filteredData = data.filter((obj, index) => ((index+1)-drawIdx) % warp == 0);
+    //console.log(filteredData);
+
+    var arrData = new Array();
+    var idx = 0;
+    //var step = Math.ceil(drawIdx / 50);
+    //console.log(step, Math.ceil(step));
+    for(var i=0; i<51; i++) {
+        //console.log("i:"+i+", idx:"+idx);
+        arrData[i] = data[idx];
+
+        if(drawIdx-1 > i)
+            idx += warp+1;
+        else
+            idx += warp;
+        
+    }
+    //console.log(arrData);
+
+
+    var ctx = document.getElementById("myAreaChart");
+    myLineChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: arrData.map((obj, index) => { return getDateFormat(obj.Date) }),
+        datasets: [{
+            label: "History",
+            lineTension: 0.3,
+            backgroundColor: green[0],
+            borderColor: green[1],
+            pointRadius: 2,
+            pointBackgroundColor: green[0],
+            pointBorderColor: green[1],
+            pointHoverRadius: 3,
+            pointHoverBackgroundColor: green[0],
+            pointHoverBorderColor: green[1],
+            pointHitRadius: 10,
+            pointBorderWidth: 2,
+            data: arrData.map((obj, index) => { return obj.Close }),
+        }],
+    },
+    options: {
+        maintainAspectRatio: false,
+        layout: {
+            padding: {
+                left: 10,
+                right: 25,
+                top: 25,
+                bottom: 0
+            }
+        },
+        scales: {
+            xAxes: [{
+                time: {
+                    unit: 'date'
+                },
+                gridLines: {
+                    display: false,
+                    drawBorder: false
+                },
+                ticks: {
+                    maxTicksLimit: 7
+                }
+            }],
+            yAxes: [{
+                ticks: {
+                    maxTicksLimit: 5,
+                    padding: 10,
+                    // Include a dollar sign in the ticks
+                    callback: function(value, index, values) {
+                        return '$' + number_format(value);
+                    }
+                },
+                gridLines: {
+                    color: "rgb(234, 236, 244)",
+                    zeroLineColor: "rgb(234, 236, 244)",
+                    drawBorder: false,
+                    borderDash: [2],
+                    zeroLineBorderDash: [2]
+                }
+            }],
+        },
+        legend: {
+            display: false
+        },
+        tooltips: {
+            backgroundColor: "rgb(255,255,255)",
+            bodyFontColor: "#858796",
+            titleMarginBottom: 10,
+            titleFontColor: '#6e707e',
+            titleFontSize: 14,
+            borderColor: '#dddfeb',
+            borderWidth: 1,
+            xPadding: 15,
+            yPadding: 15,
+            displayColors: false,
+            intersect: false,
+            mode: 'index',
+            caretPadding: 10,
+            callbacks: {
+                label: function(tooltipItem, chart) {
+                    //console.log(tooltipItem.yLabel, chart.datasets[tooltipItem.datasetIndex].data[0], tooltipItem, chart);
+                    var a = Number(tooltipItem.yLabel);
+                    var b = Number(showData[0].price);
+                    var c = Math.floor((((a) / b) - 1) * 100);
+
+                    const dateA = new Date(tooltipItem.label);
+                    const dateB = new Date(showData[0].date);
+                    var isShow = false;
+                    if(dateA >= dateB)
+                        isShow = true;
+                    else
+                        isShow = false;
+
+                    //console.log(tooltipItem.label, showData[0].date, isShow);
+
+                    //console.log(a, b, c);
+                    //var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+                    return '$' + tooltipItem.yLabel + (isShow == true ? " / " + number_format(c) + '%' : '');
+                }
+            }
+        }
+    }
+    });
+
 }
 
 function number_format(number, decimals, dec_point, thousands_sep) {
