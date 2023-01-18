@@ -438,7 +438,8 @@ function setChart(arrData) {
                         padding: 10,
                         // Include a dollar sign in the ticks
                         callback: function(value, index, values) {
-                            return '$' + number_format(value);
+                            //return '$' + number_format(value);
+                            return nFormatter(value, 1);
                         }
                     },
                     gridLines: {
@@ -657,3 +658,20 @@ function getDateFormat(date) {
 
     return resDate;
 }
+
+function nFormatter(num, digits) {
+    const lookup = [
+      { value: 1, symbol: "" },
+      { value: 1e3, symbol: "k" },
+      { value: 1e6, symbol: "M" },
+      { value: 1e9, symbol: "B" },
+      { value: 1e12, symbol: "T" },
+      { value: 1e15, symbol: "P" },
+      { value: 1e18, symbol: "E" }
+    ];
+    const rx = /\.0+$|(\.[0-9]*[1-9])0+$/;
+    var item = lookup.slice().reverse().find(function(item) {
+      return num >= item.value;
+    });
+    return item ? (num / item.value).toFixed(digits).replace(rx, "$1") + item.symbol : "0";
+  }
