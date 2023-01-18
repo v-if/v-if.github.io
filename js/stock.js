@@ -477,6 +477,8 @@ function setChart(arrData) {
     });
 }
 
+const CHART_LINE_COUNT = 100;
+
 function setAreaChart(data, showData) {
     $('#resultChart2').show();
 
@@ -485,18 +487,18 @@ function setAreaChart(data, showData) {
 
     //console.log(data, data.length, showData, showData.length);
 
-    var warp = Math.trunc(data.length / 50);
-    var drawIdx = data.length - (warp * 50);
+    var warp = Math.trunc(data.length / CHART_LINE_COUNT);
+    var drawIdx = data.length - (warp * CHART_LINE_COUNT);
     //console.log(warp, drawIdx);
 
-    var filteredData = data.filter((obj, index) => ((index+1)-drawIdx) % warp == 0);
+    //var filteredData = data.filter((obj, index) => ((index+1)-drawIdx) % warp == 0);
     //console.log(filteredData);
 
     var arrData = new Array();
     var idx = 0;
     //var step = Math.ceil(drawIdx / 50);
     //console.log(step, Math.ceil(step));
-    for(var i=0; i<51; i++) {
+    for(var i=0; i<CHART_LINE_COUNT+1; i++) {
         //console.log("i:"+i+", idx:"+idx);
         arrData[i] = data[idx];
 
@@ -519,14 +521,14 @@ function setAreaChart(data, showData) {
             lineTension: 0.3,
             backgroundColor: green[0],
             borderColor: green[1],
-            pointRadius: 2,
+            pointRadius: 1,
             pointBackgroundColor: green[0],
             pointBorderColor: green[1],
-            pointHoverRadius: 3,
+            pointHoverRadius: 1,
             pointHoverBackgroundColor: green[0],
             pointHoverBorderColor: green[1],
             pointHitRadius: 10,
-            pointBorderWidth: 2,
+            pointBorderWidth: 1,
             data: arrData.map((obj, index) => { return obj.Close }),
         }],
     },
