@@ -332,13 +332,20 @@ var my_callback = function(data)
                     rate: ''
                 }
 
+                // 초기 금액과 최종 금액을 저장할 변수 선언
+                let initialAmount = data[i].Close;
+                let finalAmount = lastData.Close;
+
+                // 수익률 계산
+                let rate = (finalAmount - initialAmount) / initialAmount * 100;
+
                 showData[1] = {
                     date: getDateFormat(lastData.Date),
                     ticker: ticker,
                     price: lastData.Close,
                     qty: showData[0].qty,
                     amount: Math.trunc(lastData.Close * showData[0].qty),
-                    rate: Math.floor((((Math.trunc(lastData.Close * showData[0].qty)) / showData[0].amount) - 1) * 100)
+                    rate: rate
                 }
 
                 break;
@@ -439,7 +446,7 @@ function setChart(arrData) {
                         // Include a dollar sign in the ticks
                         callback: function(value, index, values) {
                             //return '$' + number_format(value);
-                            return nFormatter(value, 1);
+                            return '$' + nFormatter(value, 1);
                         }
                     },
                     gridLines: {
@@ -497,19 +504,36 @@ function setAreaChart(data, showData) {
 
     var arrData = new Array();
     var idx = 0;
+    var isSkip = false;
     //var step = Math.ceil(drawIdx / 50);
     //console.log(step, Math.ceil(step));
     for(var i=0; i<CHART_LINE_COUNT+1; i++) {
-        //console.log("i:"+i+", idx:"+idx);
+        //console.log("i:"+i+", idx:"+idx, data[idx]);
         arrData[i] = data[idx];
+        arrData[i].amount = Math.trunc(data[idx].Close * showData[0].qty);
+
+
+        //console.log(getDateFormat(data[idx].Date), showData[0].date);
+
+        if(!isSkip) {
+            const dateA = new Date(getDateFormat(data[idx].Date));
+            const dateB = new Date(showData[0].date);
+            if(dateA >= dateB) {
+                isSkip = true;
+                arrData[i].flag = true;
+            }
+        }
 
         if(drawIdx-1 > i)
             idx += warp+1;
         else
             idx += warp;
+
+        if(idx >= data.length)
+            idx = data.length - 1;
         
     }
-    //console.log(arrData);
+    console.log(arrData);
 
 
     var ctx = document.getElementById("myAreaChart");
@@ -520,17 +544,17 @@ function setAreaChart(data, showData) {
         datasets: [{
             label: "History",
             lineTension: 0.3,
-            backgroundColor: green[0],
-            borderColor: green[1],
-            pointRadius: 1,
-            pointBackgroundColor: green[0],
-            pointBorderColor: green[1],
-            pointHoverRadius: 1,
-            pointHoverBackgroundColor: green[0],
-            pointHoverBorderColor: green[1],
+            backgroundColor: arrData.map((obj, index) => { return obj.flag ? red[0] : green[0] }),
+            borderColor: arrData.map((obj, index) => { return obj.flag ? red[1] : green[1] }),
+            pointRadius: arrData.map((obj, index) => { return obj.flag ? 3 : 1 }),
+            pointBackgroundColor: arrData.map((obj, index) => { return obj.flag ? red[0] : green[0] }),
+            pointBorderColor: arrData.map((obj, index) => { return obj.flag ? red[1] : green[1] }),
+            pointHoverRadius: 3,
+            pointHoverBackgroundColor: arrData.map((obj, index) => { return obj.flag ? red[0] : green[0] }),
+            pointHoverBorderColor: arrData.map((obj, index) => { return obj.flag ? red[1] : green[1] }),
             pointHitRadius: 10,
-            pointBorderWidth: 1,
-            data: arrData.map((obj, index) => { return obj.Close }),
+            pointBorderWidth: arrData.map((obj, index) => { return obj.flag ? 3 : 1 }),
+            data: arrData.map((obj, index) => { return obj.amount }),
         }],
     },
     options: {
@@ -562,7 +586,8 @@ function setAreaChart(data, showData) {
                     padding: 10,
                     // Include a dollar sign in the ticks
                     callback: function(value, index, values) {
-                        return '$' + number_format(value);
+                        //return '$' + number_format(value);
+                        return '$' + nFormatter(value, 1);
                     }
                 },
                 gridLines: {
@@ -594,9 +619,20 @@ function setAreaChart(data, showData) {
             callbacks: {
                 label: function(tooltipItem, chart) {
                     //console.log(tooltipItem.yLabel, chart.datasets[tooltipItem.datasetIndex].data[0], tooltipItem, chart);
-                    var a = Number(tooltipItem.yLabel);
-                    var b = Number(showData[0].price);
-                    var c = Math.floor((((a) / b) - 1) * 100);
+                    //var a = Number(tooltipItem.yLabel);
+                    //var b = Number(showData[0].price);
+                    //var c = Math.floor((((a) / b) - 1) * 100);
+
+
+                    // 초기 금액과 최종 금액을 저장할 변수 선언
+                    let initialAmount = Number(showData[0].price * showData[0].qty);
+                    let finalAmount = Number(tooltipItem.yLabel);
+
+                    // 수익률 계산
+                    let rate = (finalAmount - initialAmount) / initialAmount * 100;
+
+                    //console.log("수익률: " + rate + "%");
+
 
                     const dateA = new Date(tooltipItem.label);
                     const dateB = new Date(showData[0].date);
@@ -610,7 +646,7 @@ function setAreaChart(data, showData) {
 
                     //console.log(a, b, c);
                     //var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-                    return '$' + tooltipItem.yLabel + (isShow == true ? " / " + number_format(c) + '%' : '');
+                    return '$' + number_format(tooltipItem.yLabel) + (isShow == true ? " / " + number_format(rate) + '%' : '');
                 }
             }
         }
