@@ -533,31 +533,42 @@ function setAreaChart(data, showData) {
             idx = data.length - 1;
         
     }
-    console.log(arrData);
+    //console.log(arrData);
 
 
     var ctx = document.getElementById("myAreaChart");
     myLineChart = new Chart(ctx, {
     type: 'line',
     data: {
-        labels: arrData.map((obj, index) => { return getDateFormat(obj.Date) }),
+        labels: arrData.map((obj, index) => { return obj.flag ? getDateFormat(obj.Date)+'(투자시작)' : getDateFormat(obj.Date) }),
         datasets: [{
             label: "History",
             lineTension: 0.3,
             backgroundColor: green[0],
             borderColor: arrData.map((obj, index) => { return obj.flag ? red[1] : green[1] }),
-            pointRadius: arrData.map((obj, index) => { return obj.flag ? 3 : 1 }),
+            pointRadius: arrData.map((obj, index) => { return obj.flag ? 3 : 0 }),
+            //pointRadius: 0, // disable for a single dataset
             pointBackgroundColor: arrData.map((obj, index) => { return obj.flag ? red[0] : green[0] }),
             pointBorderColor: arrData.map((obj, index) => { return obj.flag ? red[1] : green[1] }),
-            pointHoverRadius: 3,
+            pointHoverRadius: arrData.map((obj, index) => { return obj.flag ? 3 : 0 }),
             pointHoverBackgroundColor: arrData.map((obj, index) => { return obj.flag ? red[0] : green[0] }),
             pointHoverBorderColor: arrData.map((obj, index) => { return obj.flag ? red[1] : green[1] }),
             pointHitRadius: 10,
-            pointBorderWidth: arrData.map((obj, index) => { return obj.flag ? 3 : 1 }),
+            pointBorderWidth: arrData.map((obj, index) => { return obj.flag ? 3 : 0 }),
             data: arrData.map((obj, index) => { return obj.amount }),
         }],
     },
     options: {
+        datasets: {
+            line: {
+                pointRadius: 0 // disable for all `'line'` datasets
+            }
+        },
+        elements: {
+            point: {
+                radius: 0 // default to disabled in all datasets
+            }
+        }, 
         maintainAspectRatio: false,
         layout: {
             padding: {
