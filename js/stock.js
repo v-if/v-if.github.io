@@ -544,7 +544,7 @@ function setAreaChart(data, showData) {
         datasets: [{
             label: "History",
             lineTension: 0.3,
-            backgroundColor: arrData.map((obj, index) => { return obj.flag ? red[0] : green[0] }),
+            backgroundColor: green[0],
             borderColor: arrData.map((obj, index) => { return obj.flag ? red[1] : green[1] }),
             pointRadius: arrData.map((obj, index) => { return obj.flag ? 3 : 1 }),
             pointBackgroundColor: arrData.map((obj, index) => { return obj.flag ? red[0] : green[0] }),
