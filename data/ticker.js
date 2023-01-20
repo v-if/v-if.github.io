@@ -3,6 +3,7 @@ data = [
     { "ticker" : "AMZN", "name" : "아마존", "startDate" : "1997-05-15" },
     { "ticker" : "COST", "name" : "코스트코", "startDate" : "1982-03-02" },
     { "ticker" : "DIS", "name" : "월트 디즈니", "startDate" : "1972-06-01" },
+    { "ticker" : "GOOGL", "name" : "알파벳(구글)", "startDate" : "2004-08-19" },
     { "ticker" : "HD", "name" : "홈디포", "startDate" : "1981-09-22" },
     { "ticker" : "KO", "name" : "코카콜라", "startDate" : "1972-06-01" },
     { "ticker" : "LOW", "name" : "로우스", "startDate" : "1972-06-01" },
