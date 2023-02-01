@@ -145,13 +145,20 @@ function calc() {
     var table = $('#dataTable').DataTable();
     table.clear();
 
+
 	if(result.monthly.length > 0) {
+        var rate = (result.totalBalance - result.totalPayment) / result.totalPayment * 100;
+        var rate2 = Math.floor(rate * 100) / 100;
+
 		$('#resultDashboard').show();
         $('#resultChart').show();
         $('#resultTable').show();
 		$('#resultAmt1').text(Math.round(result.totalPayment).toLocaleString('ko-KR') + "원");
 		$('#resultAmt2').text(Math.round(result.totalInterest).toLocaleString('ko-KR') + "원");
 		$('#resultAmt3').text(Math.round(result.totalBalance).toLocaleString('ko-KR') + "원");
+        $('#resultAmt4').text(rate2.toLocaleString('ko-KR') + "%");
+
+        console.log((result.totalBalance-result.totalPayment)/result.totalPayment*100);
 
         setChart(result);
 
@@ -179,6 +186,7 @@ function clear() {
 	$('#resultAmt1').text("0원");
 	$('#resultAmt2').text("0원");
 	$('#resultAmt3').text("0원");
+    $('#resultAmt4').text("0%");
 
     if(typeof myBarChart !== 'undefined')
         myBarChart.destroy();
