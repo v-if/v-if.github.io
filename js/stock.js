@@ -326,7 +326,7 @@ var my_callback = function(data)
                 showData[0] = {
                     date: resDate,
                     ticker: ticker,
-                    price: data[i].Close,
+                    price: '$' + number_format(data[i].Close, 2),
                     qty: Math.trunc(amount / data[i].Close),
                     amount: Math.trunc(data[i].Close * Math.trunc(amount / data[i].Close)),
                     rate: ''
@@ -342,7 +342,7 @@ var my_callback = function(data)
                 showData[1] = {
                     date: getDateFormat(lastData.Date),
                     ticker: ticker,
-                    price: lastData.Close,
+                    price: '$' + number_format(lastData.Close, 2),
                     qty: showData[0].qty,
                     amount: Math.trunc(lastData.Close * showData[0].qty),
                     rate: rate
